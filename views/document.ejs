@@ -1,0 +1,85 @@
+<nav>
+  <div class="navbar-account">
+    <div class="left">
+      <span><%= user.username %></span>
+      <span><%= user.email %></span>
+    </div>
+    <div class="right">
+      <% if (user.avatar) { %>
+        <img class="navbar-profil-picture" src="./img/<%= user.avatar %>" id="avatar-preview" >
+      <% } else { %>
+        <img class="navbar-profil-picture" src="./img/sign.png" id="avatar-preview">
+      <% } %>
+    </div>
+  </div>
+</nav>
+<% if (updocsuccessMessage) { %>
+  <div class="alert alert-success alert-berhasil" role="alert">
+    <span><%= updocsuccessMessage %></span>
+  </div>
+<% } %>
+
+
+    
+
+    <div class="tabs">
+      <button class="tab" onclick="openTab(event, 'received')">Received</button>
+      <button class="tab" onclick="openTab(event, 'yourDoc')">Your documents</button>
+    </div>
+
+    <div id="received" class="tab-content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>jabatan</th>
+            <th>status</th>
+            <th>Tanggal dikirim</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% documents.forEach(document => { %>
+            <tr>
+              <td><%= document.name %></td>
+              <td><%= document.description %></td>
+              <td><%= document.jabatan %></td>
+              <td><%= document.status %></td>
+              <td><%= moment(document.created_at).format('LL') %></td>
+              <td>
+                <a href="/download/<%= document.document_id %>" class="btn-detail">Download</a>
+                <a href="/document/<%= document.filename %>" type="application/pdf" class="btn-detail">View</a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+</div>
+
+<div id="yourDoc" class="tab-content">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Tanggal dikirim</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% yourDocs.forEach(doc => { %>
+        <tr>
+          <td><%= doc.name %></td>
+          <td><%= doc.description %></td>
+          <td><%= moment(doc.created_at).format('LL') %></td>
+          <td>
+            <a href="/download/<%= doc.document_id %>" class="btn-detail">Download</a>
+            <a href="/document/<%= doc.filename %>" type="application/pdf" class="btn-detail">View</a>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+    
+  </table>
+</div>

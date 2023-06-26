@@ -1,0 +1,101 @@
+#canvas {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: default;
+  transition: .2s;
+}
+#canvas:hover{
+  box-shadow: #b66d6d54 0px 6px 24px 0px, #b66d6d90 0px 0px 0px 1px;
+}
+
+
+.wrapper-sign{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-sign p{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+}
+
+.wrapper-canvas{
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+}
+
+.btn-canvas-wrapper{
+  display:flex;
+  flex-direction: row;
+  gap:20px;
+  margin-top:30px;
+}
+
+.btn-sign{
+  border:0;
+  width:100px;
+  height:45px;
+  background-color:#b66d6d;
+  color:#fff;
+  border-radius: 30px;
+  transition:.3s;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.btn-sign:nth-child(2){
+  background-color:transparent;
+  color:#b66d6d;
+  border: 1px solid #b66d6d;
+}
+
+.btn-sign:nth-child(2):hover{
+  background-color:#b66d6d;
+  color:#fff;
+}
+
+.btn-sign:nth-child(1):hover{
+  background-color:#945858;
+}
+
+.review-signature{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.review-signature p{
+  font-family:'poppins';
+  font-size:19px;
+  color:#b66d6d;
+}
+
+.review-signature img{
+  margin-bottom:30px;
+}
+
+.sign-download {
+  padding:5px 12px;
+  text-decoration:none;
+  background-color:#b66d6d;
+  color:#fff;
+  border-radius: 30px;
+  transition:.3s;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+}
+.sign-download:hover{
+  background-color:#824d4d;
+}

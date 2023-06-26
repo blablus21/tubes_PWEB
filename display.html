@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Display PDF</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Display PDF</h1>
+    <input type="file" id="pdfInput">
+    <div id="pdfContainer"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <script>
+    document.getElementById('pdfInput').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onload = function() {
+        var typedarray = new Uint8Array(this.result);
+
+        // Load the PDF document
+        pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+          // Fetch the first page
+          pdf.getPage(1).then(function(page) {
+            var scale = 1.5;
+            var viewport = page.getViewport({ scale: scale });
+
+            // Prepare canvas using PDF page dimensions
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Render PDF page into canvas context
+            var renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            page.render(renderContext).promise.then(function() {
+              document.getElementById('pdfContainer').innerHTML = '';
+              document.getElementById('pdfContainer').appendChild(canvas);
+            });
+          });
+        });
+      };
+
+      fileReader.readAsArrayBuffer(file);
+    });
+  </script>
+</body>
+</html>

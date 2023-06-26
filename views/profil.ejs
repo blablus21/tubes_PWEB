@@ -1,0 +1,115 @@
+<nav>
+  <div class="navbar-account">
+    <div class="left">
+      <span><%= user.username %></span>
+      <span><%= user.email %></span>
+    </div>
+    <div class="right">
+      <% if (user.avatar) { %>
+        <img src="./img/<%= user.avatar %>">
+      <% } else { %>
+        <img src="./img/sign.png"  >
+      <% } %>
+    </div>
+  </div>
+</nav>
+<% if (profilsuccessMessage) { %>
+  <div class="alert alert-success alert-berhasil" role="alert">
+    <span><%= profilsuccessMessage %></span>
+  </div>
+<% } else if (profilerrorMessage) { %> 
+  <div class="alert alert-danger alert-error" role="alert">
+    <span><%= profilerrorMessage %></span>
+  </div>
+<% } %>
+
+<div class="wrapper-profil container">
+  <form action="/edit-profil" method="POST" enctype="multipart/form-data">
+    <div class="col-sm-5 file-input-container mb-5">
+      <label for="file-upload">
+        <% if (user.avatar) { %>
+          <img src="./img/<%= user.avatar %>" id="avatar-preview" >
+        <% } else { %>
+          <img src="./img/user.png" id="avatar-preview" >
+        <% } %>
+      </label>
+      <span class="file-label">
+        <input type="file" name="avatar" id="file-upload-avatar">
+        <span class="file-label-text">Ganti avatar</span>
+      </span>
+    </div>
+  <div class="row mb-3">
+    <label for="username" class="col-sm-2 col-form-label">Your Name</label>
+    <div class="col-sm-5">
+      <input name="username" class="form-control" type="text" value="<%= user.username %>">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="email" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-5">
+      <input name="email" type="email" class="form-control" id="email" value="<%= user.email %>">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="sign" class="col-sm-2 col-form-label">Your Sign</label>
+    <div class="col-sm-5 sign-container">
+      <label for="file-upload-sign">
+        <% if (user.sign_img) { %>
+          <img src="./img/<%= user.sign_img %>" alt="sign-picture" id="sign-image" class="sign-picture" >
+        <% } else { %>
+          <img src="./img/sign.png" alt="sign-picture" id="sign-image" class="sign-picture" >
+        <% } %>
+      </label>
+      <input type="file" id="file-upload-sign" name="sign_img">
+      <!-- tombol ganti password -->
+      <button type="button" class="ganti-password-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Ganti password
+      </button>
+    </div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn-submit-profil">Save</button>
+    </div>
+  </div>
+</form>
+</div>
+
+
+<!-- ganti password Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/change-password" method="POST">
+        <div class="row mb-3">
+          <label for="currentPassword" class="col-sm-6 col-form-label">Current Password</label>
+          <div class="col-sm-6">
+            <input name="currentPassword" id="currentPassword" class="form-control" type="password">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="newPassword" class="col-sm-6 col-form-label">New Password</label>
+          <div class="col-sm-6">
+            <input name="newPassword" id="newPassword" class="form-control" type="password">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="confirmNewPassword" class="col-sm-6 col-form-label">Confirm New Password</label>
+          <div class="col-sm-6">
+            <input name="confirmNewPassword" id="confirmNewPassword" class="form-control" type="password">
+          </div>
+        </div>
+        <div class="row mb-3 mt-5">
+          <label for="confirmNewPassword" class="col-sm-6 col-form-label"></label>
+          <div class="col-sm-6">
+            <button type="submit" class="btn-submit-profil">Save</button>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>

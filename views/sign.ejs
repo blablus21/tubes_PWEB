@@ -1,0 +1,42 @@
+<nav>
+  <div class="navbar-account">
+    <div class="left">
+      <span><%= user.username %></span>
+      <span><%= user.email %></span>
+    </div>
+    <div class="right">
+      <% if (user.avatar) { %>
+        <img src="./img/<%= user.avatar %>" id="avatar-preview" >
+      <% } else { %>
+        <img src="./img/sign.png" id="avatar-preview" >
+      <% } %>
+    </div>
+  </div>
+</nav>
+<div class="wrapper-sign">
+  <div class="title-sign">
+    <p>Draw your signature</p>
+  </div>
+  <div class="wrapper-canvas">
+    <canvas id="canvas" width="700" height="300"></canvas>
+    <div class="btn-canvas-wrapper">
+      <button class="btn-sign" onclick="saveSignature()" data-bs-toggle="modal" data-bs-target="#exampleModal">Simpan</button>
+      <button class="btn-sign" onclick="clearCanvas()">Bersihkan</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body review-signature">
+      <p>Your Signature</p>
+      <img id="signatureImage" src="" width="400" height="200">
+      <a id="downloadLink" class="sign-download" download="signature.png">Download</a>
+    </div>
+  </div>
+</div>
+</div>

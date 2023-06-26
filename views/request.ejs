@@ -1,0 +1,70 @@
+<nav>
+  <div class="navbar-account">
+    <div class="left">
+      <span><%= user.username %></span>
+      <span><%= user.email %></span>
+    </div>
+    <div class="right">
+      <% if (user.avatar) { %>
+        <img src="./img/<%= user.avatar %>" id="avatar-preview" >
+      <% } else { %>
+        <img src="./img/sign.png" id="avatar-preview" >
+      <% } %>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-4">
+  <% if (successMessage) { %>
+    <div class="alert alert-success alert-berhasil" role="alert">
+      <span><%= successMessage %></span>
+    </div>
+  <% } %>
+  <form class="form-upload" action="/upload-doc-request" method="post" enctype="multipart/form-data">
+    <p class="page-title">Minta tanda tangan</p>
+    <div class="mb-3">
+      <div class="file-drop">
+        <input type="file" name="filename" id="file-input" multiple>
+        <label for="file-input" class="file-label">
+          <span><i class="bi bi-cloud-upload"></i></span>
+          <span>Click to upload</span>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <input type="hidden" value="<%= user.user_id %>">
+          <label for="name" class="form-label">Nama Dokumen</label>
+          <input type="text" class="form-control input" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Keterangan</label>
+          <textarea class="form-control input" id="description" name="description" rows="3" required></textarea>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="name" class="form-label">Penerima</label>
+          <select name="user_id" class="form-control" id="selectUser">
+            <option value="">Choose user...</option>
+            <% allUsers.forEach(function(user) { %>
+              <option value="<%= user.user_id %>"><%= user.username %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Jabatan</label>
+          <input type="text" class="form-control input" id="name" name="jabatan" required>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Status</label>
+          <input type="text" class="form-control input" id="name" name="status" required>
+        </div>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn-submit">Kirim</button>
+  </form>
+</div>

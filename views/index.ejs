@@ -1,0 +1,42 @@
+<nav>
+  <div class="navbar-account">
+    <div class="left">
+      <span><%= user.username %></span>
+      <span><%= user.email %></span>
+    </div>
+    <div class="right">
+      <% if (user.avatar) { %>
+        <img class="navbar-profil-picture" src="./img/<%= user.avatar %>" id="avatar-preview" >
+      <% } else { %>
+        <img class="navbar-profil-picture" src="./img/sign.png" id="avatar-preview">
+      <% } %>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  
+  <form class="form-upload"action="/upload-doc" method="post" enctype="multipart/form-data">
+    <p class="page-title">Upload</p>
+    <div class="mb-3">
+      <div class="file-drop">
+        <input type="file" name="filename" id="file-input" multiple>
+        <label for="file-input" class="file-label">
+          <span><i class="bi bi-cloud-upload"></i></span>
+          <span>Click to upload</span>
+        </label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Nama Dokumen</label>
+      <input type="text" class="form-control input" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Keterangan</label>
+      <textarea class="form-control input" id="description" name="description" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn-submit">Add Document</button>
+  </form>
+</div>
+
+
